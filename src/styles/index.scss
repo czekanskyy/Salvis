@@ -1,0 +1,409 @@
+:root {
+  // GLOBAL CSS VARIABLES
+  --var-primary: #222;
+  --var-secondary: #eee;
+  --var-tertiary: #ddd;
+  --var-tertiary-alpha: #e5e5e5da;
+}
+
+@mixin gap-x($size) {
+  column-gap: $size;
+}
+
+@mixin gap-y($size) {
+  row-gap: $size;
+}
+
+@mixin transition($dur: 150ms) {
+  transition: $dur all ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  line-height: 1.6;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--var-secondary);
+  color: var(--var-primary);
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  height: 72px;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: var(--var-tertiary-alpha);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--var-tertiary);
+  &__wrapper {
+    max-width: 1024px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__logo {
+    font-size: 3.2rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  &__links {
+    display: flex;
+    @include gap-x(16px);
+    a {
+      text-decoration: none;
+      color: inherit;
+      padding: 5px 10px;
+      @include transition();
+      border-radius: 8px;
+      &:hover {
+        background-color: #fff;
+      }
+    }
+  }
+  &__call-to-action {
+    display: flex;
+    @include gap-x(16px);
+    .btn {
+      &--login {
+        background-color: #fff;
+      }
+      &--register {
+        background-color: var(--var-primary);
+        color: #fff;
+      }
+    }
+  }
+}
+
+.hero {
+  min-height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include gap-y(24px);
+  h1 {
+    font-size: 8rem;
+    line-height: 1.2;
+    color: blue;
+  }
+  h2 {
+    font-weight: 400;
+    color: #333;
+  }
+  .btn {
+    &--open-account {
+      background-color: var(--var-primary);
+      color: #fff;
+    }
+  }
+}
+
+.section {
+  min-height: 100vh;
+}
+
+// MODAL
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color: rgba($color: #000, $alpha: 0.75);
+  backdrop-filter: grayscale(100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__box {
+    width: 720px;
+    background-color: #fff;
+    border-radius: 32px;
+    padding: 32px;
+  }
+  &__heading {
+    font-weight: 500;
+    font-size: 3.2rem;
+  }
+}
+
+// REGISTER FORM
+
+.form {
+  &--register {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(13, 1fr);
+    gap: 24px;
+    grid-template-areas:
+      'label-user label-user label-user label-user'
+      'first-name first-name middle-name middle-name'
+      'last-name last-name last-name last-name'
+      'personal-number personal-number birth-date birth-date'
+      'label-address label-address label-address label-address'
+      'address-1 address-1 address-1 address-1'
+      'address-2 address-2 address-2 address-2'
+      'post-code post-code city city'
+      'country country country country'
+      'label-contact label-contact label-contact label-contact'
+      'country-code phone phone phone'
+      'email email email email'
+      'create create create create';
+    input,
+    select {
+      color: inherit;
+      font-size: 1.8rem;
+      padding: 10px 20px;
+      outline: none;
+      background-color: #eeeeeeaa;
+      border-radius: 8px;
+      border: none;
+      @include transition();
+      font-family: inherit;
+      &:focus,
+      &:hover {
+        background-color: #eee;
+      }
+    }
+    input {
+      &::placeholder {
+        color: #888;
+      }
+      &[type='number'] {
+        appearance: none;
+        -moz-appearance: textfield;
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          appearance: none;
+          -webkit-appearance: none;
+        }
+      }
+    }
+    select {
+      option {
+        background-color: #fff;
+        &:hover {
+          background-color: #eee;
+        }
+      }
+    }
+  }
+  #label-user {
+    grid-area: label-user;
+  }
+  #first-name {
+    grid-area: first-name;
+  }
+  #middle-name {
+    grid-area: middle-name;
+  }
+  #last-name {
+    grid-area: last-name;
+  }
+  #personal-number {
+    grid-area: personal-number;
+  }
+  #birth-date {
+    grid-area: birth-date;
+  }
+  #label-address {
+    grid-area: label-address;
+  }
+  #address-1 {
+    grid-area: address-1;
+  }
+  #address-2 {
+    grid-area: address-2;
+  }
+  #post-code {
+    grid-area: post-code;
+  }
+  #city {
+    grid-area: city;
+  }
+  #country {
+    grid-area: country;
+  }
+  #label-contact {
+    grid-area: label-contact;
+  }
+  #country-code {
+    grid-area: country-code;
+  }
+  #phone {
+    grid-area: phone;
+  }
+  #email {
+    grid-area: email;
+  }
+  #create {
+    grid-area: create;
+  }
+
+  .label {
+    display: flex;
+    align-items: flex-end;
+    color: #555;
+    margin-bottom: -8px;
+  }
+
+  .country-code-wrapper {
+    position: relative;
+    .options {
+      width: max-content;
+      height: 208px;
+      position: absolute;
+      left: 0;
+      top: 48px;
+      background-color: #fff;
+      border-radius: 16px;
+      overflow: scroll;
+      box-shadow: 0px 0px 16px -10px rgba($color: #000, $alpha: 0.5);
+      opacity: 0;
+      transform: translateY(-4px);
+      @include transition(250ms);
+      .search-box {
+        position: sticky;
+        top: 0;
+        left: 0;
+        border-bottom: 1px solid #eee;
+        background-color: #fff;
+        input[type='search'] {
+          width: 100%;
+          border-radius: 0;
+          background-color: inherit;
+          height: 56px;
+          color: #222;
+        }
+        .search-icon {
+          width: 56px;
+          height: 56px;
+          position: absolute;
+          top: 0;
+          right: 0;
+          display: grid;
+          place-content: center;
+          img {
+            width: 24px;
+            opacity: 0.25;
+          }
+        }
+      }
+      .country {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr;
+        gap: 24px;
+        grid-template-areas: 'data country-name country-name';
+        padding: 8px;
+        margin: 4px;
+        cursor: default;
+        border-radius: 8px;
+        &:hover {
+          background-color: #eeeeeeaa;
+        }
+        .flag {
+          width: 24px;
+          height: 24px;
+          object-fit: cover;
+          border-radius: 100%;
+        }
+        .data {
+          grid-area: data;
+          color: #555;
+          display: flex;
+          align-items: center;
+          @include gap-x(1.2rem);
+          font-size: 1.8rem;
+        }
+        .country-name {
+          grid-area: country-name;
+        }
+      }
+    }
+    .fade {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .btn {
+    &--create-account {
+      background-color: var(--var-primary);
+      color: #fff;
+      font-weight: 500;
+      &:focus,
+      &:hover {
+        background-color: lighten($color: #222, $amount: 3);
+      }
+    }
+    &--select {
+      background-color: #eeeeeeaa;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      position: relative;
+      &:focus,
+      &:hover {
+        background-color: #eee;
+      }
+      .selected-country {
+        display: flex;
+        align-items: center;
+        @include gap-x(12px);
+        img {
+          width: 24px;
+          height: 24px;
+          border-radius: 100%;
+          object-fit: cover;
+          overflow: hidden;
+        }
+        .temp {
+          width: 64px;
+          height: 18px;
+          border-radius: 32px;
+          background-color: #888;
+        }
+      }
+    }
+  }
+}
+
+// GLOBAL STYLES
+
+.btn {
+  font-family: inherit;
+  border: none;
+  padding: 8px 16px;
+  outline: none;
+  font-size: 1.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: inherit;
+  @include transition();
+}
+
+.hidden {
+  display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
+}

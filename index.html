@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/icon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+
+    <title>Salvis</title>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="nav__wrapper">
+        <div class="nav__logo">Salvis</div>
+        <div class="nav__links">
+          <a class="nav__link" href="#section--0">Features</a>
+          <a class="nav__link" href="#section--1">Testimonials</a>
+          <a class="nav__link" href="#section--2">Plans</a>
+        </div>
+        <div class="nav__call-to-action">
+          <button class="btn btn--login">Log in</button>
+          <button class="btn btn--register">Sign up</button>
+        </div>
+      </div>
+    </nav>
+    <main class="hero">
+      <h1>Earn, save, invest<br />all in one app</h1>
+      <h2>The banking app that makes your money work for you.</h2>
+      <button class="btn btn--open-account">Open free account</button>
+    </main>
+    <section id="section--0" class="section"></section>
+
+    <!-- SIGN UP MODAL -->
+    <div class="modal modal--container">
+      <div class="modal__box modal--sign-up">
+        <p class="modal__heading">Create account</p>
+        <form class="form form--register">
+          <!-- USER -->
+          <p class="label" id="label-user">User details</p>
+          <input type="text" id="first-name" placeholder="First name *" required />
+          <input type="text" id="middle-name" placeholder="Middle name" />
+          <input type="text" id="last-name" placeholder="Last name *" required />
+          <input type="number" id="personal-number" placeholder="Personal ID number *" required />
+          <input type="date" id="birth-date" placeholder="Date of birth *" required />
+          <!-- ADDRESS -->
+          <p class="label" id="label-address">Address</p>
+          <input type="text" id="address-1" placeholder="Address line 1 *" required />
+          <input type="text" id="address-2" placeholder="Address line 2" />
+          <input type="number" id="post-code" placeholder="Post code *" required />
+          <input type="text" id="city" placeholder="City *" required />
+          <input type="text" id="country" placeholder="Country *" required />
+          <!-- CONTACT -->
+          <p class="label" id="label-contact">Contact info</p>
+          <!-- <select id="country-code">
+            <option value="placeholder" disabled selected>Select country code</option>
+          </select> -->
+          <div id="country-code" class="country-code-wrapper">
+            <button id="select" class="btn btn--select">
+              <div class="selected-country">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Solid_grey.svg" alt="placeholder" />
+                <div class="temp"></div>
+              </div>
+            </button>
+            <div class="options hidden">
+              <div class="search-box">
+                <input type="search" name="phone-search" id="phone-search" placeholder="Search" />
+                <p class="search-icon">
+                  <img src="/search-icon.svg" alt="search" />
+                </p>
+              </div>
+            </div>
+          </div>
+          <input type="tel" id="phone" placeholder="Phone number *" required />
+          <input type="email" id="email" placeholder="Email *" required />
+          <button type="submit" class="btn btn--create-account" id="create">Create account</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
