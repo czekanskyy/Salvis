@@ -13,6 +13,22 @@ const modalElement: HTMLDivElement = document.querySelector('.modal')!;
 const signupButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn--sign-up')!;
 const HeroSection: HTMLElement = document.querySelector('.hero')!;
 const HeroBgImage: HTMLImageElement = document.querySelector('.hero__bg')!;
+const mobileMenuToggler: HTMLButtonElement = document.querySelector('.toggler')!;
+const mobileMenu: HTMLDivElement = document.querySelector('.mobile-menu')!;
+
+const fadeIn = (el: HTMLElement) => {
+  el.classList.remove('hidden');
+  setTimeout(() => {
+    el.classList.add('fade');
+  }, 10);
+};
+
+const fadeOut = (el: HTMLElement) => {
+  el.classList.remove('fade');
+  setTimeout(() => {
+    el.classList.add('hidden');
+  }, 250);
+};
 
 const handleHeroScroll = () => {
   const height = HeroSection.getBoundingClientRect().height;
@@ -58,10 +74,7 @@ signupButtons.forEach(btn => {
       setServedAreaCodes(countryCodeOptions);
       dataRequested = true;
     }
-    modalElement.classList.remove('hidden');
-    setTimeout(() => {
-      modalElement.classList.add('fade');
-    }, 10);
+    fadeIn(modalElement);
     document.body.classList.add('no-scroll');
   });
 });
@@ -70,26 +83,17 @@ signupButtons.forEach(btn => {
 modalElement.addEventListener('click', e => {
   const target = e.target as HTMLElement;
   if (target.classList.contains('modal--container') || target.closest('.btn--close-modal')) {
-    modalElement.classList.remove('fade');
-    setTimeout(() => {
-      modalElement.classList.add('hidden');
-    }, 250);
+    fadeOut(modalElement);
     document.body.classList.remove('no-scroll');
   }
 });
 
 // Show / Hide country codes (phone) select menu
 const showCountryCodes = function () {
-  countryCodeOptions.classList.remove('hidden');
-  setTimeout(() => {
-    countryCodeOptions.classList.add('fade');
-  }, 10);
+  fadeIn(countryCodeOptions);
 };
 const hideCountryCodes = function () {
-  countryCodeOptions.classList.remove('fade');
-  setTimeout(() => {
-    countryCodeOptions.classList.add('hidden');
-  }, 250);
+  fadeOut(countryCodeOptions);
 };
 
 countryCodeBtn.addEventListener('click', e => {
@@ -110,4 +114,17 @@ countrySearch.addEventListener('input', e => {
   const target = e.target as HTMLInputElement;
   const text = target.value;
   console.log(text);
+});
+
+mobileMenuToggler.addEventListener('click', () => {
+  const icons: NodeListOf<HTMLImageElement> = mobileMenuToggler.querySelectorAll('img')!;
+  icons.forEach(icon => {
+    icon.classList.toggle('hidden');
+  });
+  document.body.classList.toggle('no-scroll');
+  if (mobileMenu.classList.contains('hidden')) {
+    fadeIn(mobileMenu);
+  } else {
+    fadeOut(mobileMenu);
+  }
 });
