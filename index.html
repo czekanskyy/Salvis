@@ -26,19 +26,20 @@
         </div>
         <div class="nav__call-to-action">
           <button class="btn btn--login">Log in</button>
-          <button class="btn btn--register">Sign up</button>
+          <button class="btn btn--sign-up">Sign up</button>
         </div>
       </div>
     </nav>
     <main class="hero">
+      <img class="hero__bg" src="/salvis-hero.webp" alt="background image, world map with connections" />
       <h1>Earn, save, invest<br />all in one app</h1>
       <h2>The banking app that makes your money work for you.</h2>
-      <button class="btn btn--open-account">Open free account</button>
+      <button class="btn btn--sign-up">Open free account</button>
     </main>
     <section id="section--0" class="section"></section>
 
     <!-- SIGN UP MODAL -->
-    <div class="modal modal--container">
+    <div class="modal modal--container hidden">
       <div class="modal__box modal--sign-up">
         <p class="modal__heading">Create account</p>
         <form class="form form--register">
@@ -47,7 +48,7 @@
           <input type="text" id="first-name" placeholder="First name *" required />
           <input type="text" id="middle-name" placeholder="Middle name" />
           <input type="text" id="last-name" placeholder="Last name *" required />
-          <input type="number" id="personal-number" placeholder="Personal ID number *" required />
+          <input type="number" id="personal-number" placeholder="Personal ID number *" required inputmode="numeric" />
           <input type="date" id="birth-date" placeholder="Date of birth *" required />
           <!-- ADDRESS -->
           <p class="label" id="label-address">Address</p>
@@ -58,9 +59,6 @@
           <input type="text" id="country" placeholder="Country *" required />
           <!-- CONTACT -->
           <p class="label" id="label-contact">Contact info</p>
-          <!-- <select id="country-code">
-            <option value="placeholder" disabled selected>Select country code</option>
-          </select> -->
           <div id="country-code" class="country-code-wrapper">
             <button id="select" class="btn btn--select">
               <div class="selected-country">
@@ -77,10 +75,13 @@
               </div>
             </div>
           </div>
-          <input type="tel" id="phone" placeholder="Phone number *" required />
-          <input type="email" id="email" placeholder="Email *" required />
+          <input type="tel" id="phone" placeholder="Phone number *" required inputmode="tel" />
+          <input type="email" id="email" placeholder="Email *" required inputmode="email" />
           <button type="submit" class="btn btn--create-account" id="create">Create account</button>
         </form>
+        <button class="btn btn--close-modal">
+          <img src="/close-icon.svg" alt="close button" />
+        </button>
       </div>
     </div>
   </body>

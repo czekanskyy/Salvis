@@ -1,24 +1,7 @@
 import './styles/index.scss';
+import { setSelectedAreaCode, setServedAreaCodes, setUserAreaCode } from './registerForm';
 
-interface CountryData {
-  name: string;
-  flag: string;
-  phone: number;
-}
-
-interface CountryResponse {
-  name: string;
-  flags: {
-    svg: string;
-  };
-  callingCodes: string[];
-}
-
-interface LocationData {
-  name: string;
-  flag: string;
-  phone: number;
-}
+let dataRequested = false;
 
 const nav: HTMLDivElement = document.querySelector('.nav__links')!;
 const logo: HTMLDivElement = document.querySelector('.nav__logo')!;
@@ -26,13 +9,40 @@ const countryCodeBtn: HTMLButtonElement = document.querySelector('.btn--select')
 const countryCodeOptions: HTMLDivElement = document.querySelector('.options')!;
 const countrySearch: HTMLInputElement = document.querySelector('#phone-search')!;
 const currentPhone: HTMLButtonElement = document.querySelector('#select')!;
+const modalElement: HTMLDivElement = document.querySelector('.modal')!;
+const signupButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn--sign-up')!;
+const HeroSection: HTMLElement = document.querySelector('.hero')!;
+const HeroBgImage: HTMLImageElement = document.querySelector('.hero__bg')!;
+
+const handleHeroScroll = (e: Event) => {
+  const height = HeroSection.getBoundingClientRect().height;
+  const bottom = HeroSection.getBoundingClientRect().bottom;
+  const distance = Number((Math.round(Math.sqrt(bottom / height) * 100) / 100).toFixed(2));
+  HeroBgImage.style.opacity = `${Math.pow(distance, 2)}`;
+  HeroBgImage.style.transform = `scale(${2 - Math.sqrt(distance)})`;
+};
+
+const observerOptions = {
+  root: null,
+  threshold: 0.01,
+  rootMargin: '0px',
+};
+
+const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+  const isInView = entries[0].isIntersecting;
+  // console.log(isInView);
+  if (isInView) document.addEventListener('scroll', handleHeroScroll);
+  else document.removeEventListener('scroll', handleHeroScroll);
+};
+
+const observer = new IntersectionObserver(observerCallback, observerOptions);
+observer.observe(HeroSection);
 
 // Nav functionality
-
 logo.addEventListener('click', () => document.querySelector('.hero')?.scrollIntoView({ behavior: 'smooth' }));
 
 nav.addEventListener('click', e => {
-  const target = e.target as HTMLAnchorElement;
+  const target = e.target as HTMLElement;
   // console.log(target?.classList.contains('nav__link'));
   if (!target?.classList.contains('nav__link')) return;
   e.preventDefault();
@@ -40,52 +50,33 @@ nav.addEventListener('click', e => {
   document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
 });
 
-// Get country data
-const getCountryData = async () => {
-  try {
-    const req = await fetch(`https://restcountries.com/v2/regionalbloc/eu`);
-    const res: CountryResponse[] = await req.json();
-    const data: CountryData[] = [];
-    res.forEach(c => {
-      const obj = {
-        name: c.name,
-        flag: c.flags.svg,
-        phone: Number(c.callingCodes[0]),
-      };
-      data.push(obj);
-    });
-    return data;
-  } catch (error) {
-    console.error(error.message);
-    return;
-  }
-};
+// Show Sign up modal
+signupButtons.forEach(btn => {
+  btn.addEventListener('click', e => {
+    if (!dataRequested) {
+      setUserAreaCode(currentPhone);
+      setServedAreaCodes(countryCodeOptions);
+      dataRequested = true;
+    }
+    modalElement.classList.remove('hidden');
+    setTimeout(() => {
+      modalElement.classList.add('fade');
+    }, 10);
+    document.body.classList.add('no-scroll');
+  });
+});
 
-const getCurrentCountry = async () => {
-  try {
-    const preReq = await fetch(`https://api.ipregistry.co/?key=egj8f14wsd947qsm`);
-    const preRes: {
-      location: {
-        country: {
-          name: string;
-        };
-      };
-    } = await preReq.json();
-    const countryName = preRes.location.country.name;
-    console.log(countryName);
-    const req = await fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`);
-    const res = await req.json();
-    const data: LocationData = {
-      name: res[0].name.common,
-      flag: res[0].flags.svg,
-      phone: Number(res[0].idd.root[1] + res[0].idd.suffixes[0]),
-    };
-    return data;
-  } catch (error) {
-    console.error(error.message);
-    return;
+// Hide Sign up modal
+modalElement.addEventListener('click', e => {
+  const target = e.target as HTMLElement;
+  if (target.classList.contains('modal--container') || target.closest('.btn--close-modal')) {
+    modalElement.classList.remove('fade');
+    setTimeout(() => {
+      modalElement.classList.add('hidden');
+    }, 250);
+    document.body.classList.remove('no-scroll');
   }
-};
+});
 
 // Show / Hide country codes (phone) select menu
 const showCountryCodes = function () {
@@ -93,14 +84,12 @@ const showCountryCodes = function () {
   setTimeout(() => {
     countryCodeOptions.classList.add('fade');
   }, 10);
-  document.body.classList.add('no-scroll');
 };
 const hideCountryCodes = function () {
   countryCodeOptions.classList.remove('fade');
   setTimeout(() => {
     countryCodeOptions.classList.add('hidden');
   }, 250);
-  document.body.classList.remove('no-scroll');
 };
 
 countryCodeBtn.addEventListener('click', e => {
@@ -108,8 +97,13 @@ countryCodeBtn.addEventListener('click', e => {
   countryCodeOptions.classList.contains('hidden') ? showCountryCodes() : hideCountryCodes();
 });
 
-// Insert HTML code into country code select
-// countryCodes.
+countryCodeOptions.addEventListener('click', e => {
+  const target = e.target as HTMLElement;
+  if (target.closest('.country')) {
+    setSelectedAreaCode(target.closest('.country')!, currentPhone);
+    hideCountryCodes();
+  }
+});
 
 // Search input
 countrySearch.addEventListener('input', e => {
@@ -117,32 +111,3 @@ countrySearch.addEventListener('input', e => {
   const text = target.value;
   console.log(text);
 });
-
-const countryData: CountryData[] | undefined = await getCountryData();
-// console.table(countryData);
-
-countryData?.forEach(data =>
-  countryCodeOptions.insertAdjacentHTML(
-    'beforeend',
-    `
-<p class="country" data-countryname="${data.name.toLowerCase()}" value="${data.phone}">
-	<span class="data"><img src="${data.flag}" class="flag" /> +${data.phone}</span>
-	<span class"country-name">${data.name}</span>
-</p>
-`
-  )
-);
-
-const userLocation = await getCurrentCountry();
-console.log(userLocation);
-
-currentPhone.innerHTML = '';
-currentPhone.insertAdjacentHTML(
-  'beforeend',
-  `
-	<div class="selected-country" data-code="${userLocation?.phone}">
-		<img src="${userLocation?.flag}" alt="${userLocation?.name}" />
-		<p>+${userLocation?.phone}</p>
-	</div>
-`
-);
