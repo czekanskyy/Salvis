@@ -14,7 +14,7 @@ const signupButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('
 const HeroSection: HTMLElement = document.querySelector('.hero')!;
 const HeroBgImage: HTMLImageElement = document.querySelector('.hero__bg')!;
 
-const handleHeroScroll = (e: Event) => {
+const handleHeroScroll = () => {
   const height = HeroSection.getBoundingClientRect().height;
   const bottom = HeroSection.getBoundingClientRect().bottom;
   const distance = Number((Math.round(Math.sqrt(bottom / height) * 100) / 100).toFixed(2));
@@ -28,7 +28,7 @@ const observerOptions = {
   rootMargin: '0px',
 };
 
-const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+const observerCallback = (entries: IntersectionObserverEntry[]) => {
   const isInView = entries[0].isIntersecting;
   // console.log(isInView);
   if (isInView) document.addEventListener('scroll', handleHeroScroll);
@@ -52,7 +52,7 @@ nav.addEventListener('click', e => {
 
 // Show Sign up modal
 signupButtons.forEach(btn => {
-  btn.addEventListener('click', e => {
+  btn.addEventListener('click', () => {
     if (!dataRequested) {
       setUserAreaCode(currentPhone);
       setServedAreaCodes(countryCodeOptions);
