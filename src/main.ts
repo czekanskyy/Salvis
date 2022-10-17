@@ -12,9 +12,6 @@ const countrySearch: HTMLInputElement = document.querySelector('#phone-search')!
 const currentPhone: HTMLButtonElement = document.querySelector('#select')!;
 const modalElement: HTMLDivElement = document.querySelector('.modal')!;
 const signupButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn--sign-up')!;
-const mobileMenuToggler: HTMLButtonElement = document.querySelector('.toggler')!;
-const mobileMenu: HTMLDivElement = document.querySelector('.mobile-menu')!;
-
 // Show Sign up modal
 signupButtons.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -63,17 +60,4 @@ countrySearch.addEventListener('input', e => {
   const target = e.target as HTMLInputElement;
   const text = target.value;
   console.log(text);
-});
-
-mobileMenuToggler.addEventListener('click', () => {
-  const icons: NodeListOf<HTMLImageElement> = mobileMenuToggler.querySelectorAll('img')!;
-  icons.forEach(icon => {
-    icon.classList.toggle('hidden');
-  });
-  document.body.classList.toggle('no-scroll');
-  if (mobileMenu.classList.contains('hidden')) {
-    fadeIn(mobileMenu);
-  } else {
-    fadeOut(mobileMenu);
-  }
 });
