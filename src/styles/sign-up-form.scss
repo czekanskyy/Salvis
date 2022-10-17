@@ -3,25 +3,132 @@
 // SIGN UP FORM
 
 .form {
-  &--register {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(13, 1fr);
-    gap: 24px;
-    grid-template-areas:
-      'label-user label-user label-user label-user'
-      'first-name first-name middle-name middle-name'
-      'last-name last-name last-name last-name'
-      'personal-number personal-number birth-date birth-date'
-      'label-address label-address label-address label-address'
-      'address-1 address-1 address-1 address-1'
-      'address-2 address-2 address-2 address-2'
-      'post-code post-code city city'
-      'country country country country'
-      'label-contact label-contact label-contact label-contact'
-      'country-code phone phone phone'
-      'email email email email'
-      'create create create create';
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  @include mixins.gap-y(32px);
+  &__carousel {
+    width: 100%;
+    height: 372px;
+    position: relative;
+  }
+
+  &__section {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include mixins.transition(250ms);
+
+    &__label {
+      grid-area: label;
+      display: flex;
+      align-items: flex-end;
+      color: #555;
+      margin-bottom: -8px;
+    }
+
+    &__spacer {
+      grid-area: spacer;
+    }
+
+    &__switcher {
+      width: 61px;
+
+      &--prev {
+        grid-area: prev;
+        justify-self: start;
+      }
+
+      &--next {
+        grid-area: next;
+        justify-self: end;
+      }
+    }
+
+    &--user {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 24px;
+      grid-template-areas:
+        'label label'
+        'first-name middle-name'
+        'last-name last-name'
+        'personal-number birth-date'
+        'spacer spacer'
+        'prev next';
+      #first-name {
+        grid-area: first-name;
+      }
+      #middle-name {
+        grid-area: middle-name;
+      }
+      #last-name {
+        grid-area: last-name;
+      }
+      #personal-number {
+        grid-area: personal-number;
+      }
+      #birth-date {
+        grid-area: birth-date;
+      }
+    }
+
+    &--address {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 24px;
+      grid-template-areas:
+        'label label'
+        'address-1 address-1'
+        'address-2 address-2'
+        'post-code city'
+        'country country'
+        'prev next';
+      #address-1 {
+        grid-area: address-1;
+      }
+      #address-2 {
+        grid-area: address-2;
+      }
+      #post-code {
+        grid-area: post-code;
+      }
+      #city {
+        grid-area: city;
+      }
+      #country {
+        grid-area: country;
+      }
+    }
+
+    &--contact {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 24px;
+      grid-template-areas:
+        'label label label label label label label label'
+        'country-code country-code phone phone phone phone phone phone'
+        'email email email email email email email email'
+        'spacer spacer spacer spacer spacer spacer spacer spacer'
+        'spacer spacer spacer spacer spacer spacer spacer spacer'
+        'prev create create create create create create create';
+      #country-code {
+        grid-area: country-code;
+      }
+      #phone {
+        grid-area: phone;
+      }
+      #email {
+        grid-area: email;
+      }
+    }
+  }
+
+  &--sign-up {
     input,
     select {
       color: inherit;
@@ -60,64 +167,6 @@
         }
       }
     }
-  }
-  #label-user {
-    grid-area: label-user;
-  }
-  #first-name {
-    grid-area: first-name;
-  }
-  #middle-name {
-    grid-area: middle-name;
-  }
-  #last-name {
-    grid-area: last-name;
-  }
-  #personal-number {
-    grid-area: personal-number;
-  }
-  #birth-date {
-    grid-area: birth-date;
-  }
-  #label-address {
-    grid-area: label-address;
-  }
-  #address-1 {
-    grid-area: address-1;
-  }
-  #address-2 {
-    grid-area: address-2;
-  }
-  #post-code {
-    grid-area: post-code;
-  }
-  #city {
-    grid-area: city;
-  }
-  #country {
-    grid-area: country;
-  }
-  #label-contact {
-    grid-area: label-contact;
-  }
-  #country-code {
-    grid-area: country-code;
-  }
-  #phone {
-    grid-area: phone;
-  }
-  #email {
-    grid-area: email;
-  }
-  #create {
-    grid-area: create;
-  }
-
-  .label {
-    display: flex;
-    align-items: flex-end;
-    color: #555;
-    margin-bottom: -8px;
   }
 
   .country-code-wrapper {
@@ -197,9 +246,11 @@
   }
   .btn {
     &--create-account {
+      grid-area: create;
       background-color: var(--var-primary);
       color: #fff;
       font-weight: 500;
+      flex-grow: 1;
       &:focus,
       &:hover {
         background-color: lighten($color: #222, $amount: 3);
@@ -231,6 +282,62 @@
           height: 18px;
           border-radius: 32px;
           background-color: #888;
+        }
+      }
+    }
+  }
+}
+
+@media screen {
+  @media (max-width: 720px) {
+    .form {
+      &__carousel {
+        height: 390px;
+      }
+      &__section {
+        &--user {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(7, 1fr);
+          gap: 16px;
+          grid-template-areas:
+            'label label'
+            'first-name first-name'
+            'middle-name middle-name'
+            'last-name last-name'
+            'personal-number personal-number'
+            'birth-date birth-date'
+            'prev next';
+        }
+
+        &--address {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(7, 1fr);
+          gap: 16px;
+          grid-template-areas:
+            'label label'
+            'address-1 address-1'
+            'address-2 address-2'
+            'post-code post-code'
+            'city city'
+            'country country'
+            'prev next';
+        }
+
+        &--contact {
+          display: grid;
+          grid-template-columns: repeat(8, 1fr);
+          grid-template-rows: repeat(7, 1fr);
+          gap: 16px;
+          grid-template-areas:
+            'label label label label label label label label'
+            'country-code country-code phone phone phone phone phone phone'
+            'email email email email email email email email'
+            'spacer spacer spacer spacer spacer spacer spacer spacer'
+            'spacer spacer spacer spacer spacer spacer spacer spacer'
+            'spacer spacer spacer spacer spacer spacer spacer spacer'
+            'prev create create create create create create create';
         }
       }
     }

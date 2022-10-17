@@ -12,6 +12,10 @@ interface CountryData {
   phone: number;
 }
 
+const btnPrev: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.form__section__switcher--prev')!;
+const btnNext: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.form__section__switcher--next')!;
+const formSections: NodeListOf<HTMLElement> = document.querySelectorAll('.form__section')!;
+
 const locateMe = async () => {
   try {
     // Get user's country data based on it's IP Address
@@ -123,6 +127,20 @@ const setServedAreaCodes = async (el: HTMLElement) => {
     );
   });
 };
+
+// Toggle between sign-up form pages
+const transforms = [0, 720, 1440];
+
+const togglePage = (e: MouseEvent, prev: boolean = false) => {
+  e.preventDefault();
+  formSections.forEach((sect, id) => {
+    prev ? (transforms[id] += 720) : (transforms[id] -= 720);
+    sect.style.transform = `translateX(${transforms[id]}px)`;
+  });
+};
+
+btnPrev.forEach(btn => btn.addEventListener('click', e => togglePage(e, true)));
+btnNext.forEach(btn => btn.addEventListener('click', e => togglePage(e)));
 
 // Handle form submition (user registration)
 const handleSubmit = () => {

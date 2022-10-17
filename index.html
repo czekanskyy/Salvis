@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https:fonts.googleapis.com" />
+    <link rel="preconnect" href="https:fonts.gstatic.com" crossorigin />
+    <link href="https:fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
 
     <title>Salvis</title>
 
@@ -176,46 +176,68 @@
     <!-- COMPONENTS -->
 
     <!-- SIGN UP MODAL -->
-    <div class="modal modal--container hidden">
+    <!-- <div class="modal modal--container hidden"> -->
+    <div class="modal modal--container">
       <div class="modal__box modal--sign-up">
         <p class="modal__heading">Create account</p>
-        <form class="form form--register">
-          <!-- USER -->
-          <p class="label" id="label-user">User details</p>
-          <input type="text" id="first-name" placeholder="First name *" required />
-          <input type="text" id="middle-name" placeholder="Middle name" />
-          <input type="text" id="last-name" placeholder="Last name *" required />
-          <input type="number" id="personal-number" placeholder="Personal ID number *" required inputmode="numeric" />
-          <input type="date" id="birth-date" placeholder="Date of birth *" required />
-          <!-- ADDRESS -->
-          <p class="label" id="label-address">Address</p>
-          <input type="text" id="address-1" placeholder="Address line 1 *" required />
-          <input type="text" id="address-2" placeholder="Address line 2" />
-          <input type="number" id="post-code" placeholder="Post code *" required />
-          <input type="text" id="city" placeholder="City *" required />
-          <input type="text" id="country" placeholder="Country *" required />
-          <!-- CONTACT -->
-          <p class="label" id="label-contact">Contact info</p>
-          <div id="country-code" class="country-code-wrapper">
-            <button id="select" class="btn btn--select">
-              <div class="selected-country">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Solid_grey.svg" alt="placeholder" />
-                <div class="temp"></div>
+
+        <form class="form form--sign-up">
+          <div class="form__carousel">
+            <!-- USER -->
+            <!-- style="transform: translateX(-800px)" -->
+            <section class="form__section form__section--user" style="transform: translateX(0px)">
+              <p class="form__section__label">User details</p>
+              <input type="text" id="first-name" placeholder="First name *" required />
+              <input type="text" id="middle-name" placeholder="Middle name" />
+              <input type="text" id="last-name" placeholder="Last name *" required />
+              <input type="number" id="personal-number" placeholder="Personal ID number *" required inputmode="numeric" />
+              <input type="date" id="birth-date" placeholder="Date of birth *" required />
+
+              <button class="btn form__section__switcher form__section__switcher--prev hidden">&larr;</button>
+              <button class="btn form__section__switcher form__section__switcher--next">&rarr;</button>
+            </section>
+
+            <!-- ADDRESSS -->
+            <section class="form__section form__section--address" style="transform: translateX(720px)">
+              <p class="form__section__label">Address</p>
+              <input type="text" id="address-1" placeholder="Address line 1 *" required />
+              <input type="text" id="address-2" placeholder="Address line 2" />
+              <input type="number" id="post-code" placeholder="Post code *" required />
+              <input type="text" id="city" placeholder="City *" required />
+              <input type="text" id="country" placeholder="Country *" required />
+
+              <button class="btn form__section__switcher form__section__switcher--prev">&larr;</button>
+              <button class="btn form__section__switcher form__section__switcher--next">&rarr;</button>
+            </section>
+
+            <!-- CONTACT -->
+            <section class="form__section form__section--contact" style="transform: translateX(1440px)">
+              <p class="form__section__label">Contact info</p>
+              <div id="country-code" class="country-code-wrapper">
+                <button id="select" class="btn btn--select">
+                  <div class="selected-country">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Solid_grey.svg" alt="placeholder" />
+                    <div class="temp"></div>
+                  </div>
+                </button>
+                <div class="options hidden">
+                  <div class="search-box">
+                    <input type="search" name="phone-search" id="phone-search" placeholder="Search" />
+                    <p class="search-icon">
+                      <img src="/search-icon.svg" alt="search" />
+                    </p>
+                  </div>
+                </div>
               </div>
-            </button>
-            <div class="options hidden">
-              <div class="search-box">
-                <input type="search" name="phone-search" id="phone-search" placeholder="Search" />
-                <p class="search-icon">
-                  <img src="/search-icon.svg" alt="search" />
-                </p>
-              </div>
-            </div>
+              <input type="tel" id="phone" placeholder="Phone number *" required inputmode="tel" />
+              <input type="email" id="email" placeholder="Email *" required inputmode="email" />
+
+              <button class="btn form__section__switcher form__section__switcher--prev">&larr;</button>
+              <button type="submit" class="btn btn--create-account" id="create">Create account</button>
+            </section>
           </div>
-          <input type="tel" id="phone" placeholder="Phone number *" required inputmode="tel" />
-          <input type="email" id="email" placeholder="Email *" required inputmode="email" />
-          <button type="submit" class="btn btn--create-account" id="create">Create account</button>
         </form>
+
         <button class="btn btn--close-modal">
           <img src="/close-icon.svg" alt="close button" />
         </button>
