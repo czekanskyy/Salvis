@@ -1,0 +1,11 @@
+@mixin gap-x($size) {
+  column-gap: $size;
+}
+
+@mixin gap-y($size) {
+  row-gap: $size;
+}
+
+@mixin transition($dur: 150ms) {
+  transition: $dur all ease-in-out;
+}

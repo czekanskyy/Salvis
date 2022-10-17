@@ -1,0 +1,50 @@
+@use 'mixins';
+
+// MODAL
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background-color: rgba($color: #000, $alpha: 0.75);
+  backdrop-filter: grayscale(100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include mixins.transition(250ms);
+  opacity: 0;
+  transform: translateY(-4px);
+  &__box {
+    width: 720px;
+    background-color: #fff;
+    border-radius: 32px;
+    padding: 32px;
+    position: relative;
+  }
+  &__heading {
+    font-weight: 500;
+    font-size: 3.2rem;
+  }
+  .btn {
+    &--close-modal {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      border-radius: 100%;
+      padding: 8px;
+      display: grid;
+      place-content: center;
+      background-color: var(--var-tertiary-alpha);
+      &:hover {
+        background-color: var(--var-tertiary);
+      }
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}

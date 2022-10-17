@@ -1,0 +1,113 @@
+@use 'mixins';
+
+// NAVBAR COMPONENT
+
+.nav {
+  position: fixed;
+  z-index: 50;
+  width: 100%;
+  height: 72px;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: var(--var-tertiary-alpha);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--var-tertiary);
+  &__wrapper {
+    max-width: 1024px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__logo {
+    font-size: 3.2rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  &__links,
+  &__links--mobile {
+    display: flex;
+    @include mixins.gap-x(16px);
+    a {
+      text-decoration: none;
+      color: inherit;
+      padding: 5px 10px;
+      @include mixins.transition();
+      border-radius: 8px;
+      &:hover {
+        background-color: #fff;
+      }
+    }
+  }
+  &__call-to-action,
+  &__call-to-action--mobile {
+    display: flex;
+    @include mixins.gap-x(16px);
+    .btn {
+      &--login {
+        background-color: #fff;
+      }
+    }
+  }
+  &__mobile-button {
+    border: none;
+    background-color: #fff;
+    padding: 6px;
+    border-radius: 8px;
+    place-content: center;
+    cursor: pointer;
+    img {
+      width: 28px;
+      height: 28px;
+    }
+    display: none;
+  }
+  &__mobile-menu {
+    @include mixins.transition(250ms);
+    opacity: 0;
+    transform: translateY(-4px);
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: 0;
+    background-color: var(--var-tertiary-alpha);
+    backdrop-filter: blur(8px);
+    width: 100vw;
+    height: calc(100vh - 72px);
+    padding: 16px;
+    flex-direction: column;
+    justify-content: center;
+    @include mixins.gap-y(64px);
+    .nav__links--mobile,
+    .nav__call-to-action--mobile {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      @include mixins.gap-y(16px);
+      font-size: 3.6rem;
+      button {
+        font-size: 2.4rem;
+      }
+    }
+  }
+}
+
+@media screen {
+  @media (max-width: 1056px) {
+    .nav {
+      padding: 0 16px;
+      &__links,
+      &__call-to-action {
+        display: none;
+      }
+      &__mobile-button {
+        display: grid;
+      }
+      &__mobile-menu {
+        display: flex;
+      }
+    }
+  }
+}
