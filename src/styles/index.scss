@@ -6,6 +6,7 @@
 // SECTIONS
 @use 'hero';
 @use 'features';
+@use 'testimonials';
 
 :root {
   // GLOBAL CSS VARIABLES
@@ -37,6 +38,7 @@ body {
 
 .section {
   min-height: 100vh;
+  padding-top: 80px;
 }
 
 // GLOBAL STYLES

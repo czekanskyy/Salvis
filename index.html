@@ -56,7 +56,7 @@
     </main>
 
     <!-- FEATURES SECTION -->
-    <article id="section--0" class="section features">
+    <features id="section--0" class="section features">
       <h2>Features</h2>
 
       <!-- Feature group 1: Smart banking -->
@@ -165,10 +165,16 @@
           </div>
         </div>
       </div>
-    </article>
+    </features>
 
     <!-- TESTIMONIALS SECTION -->
-    <section id="section--1" class="section"></section>
+    <section id="section--1" class="section testimonials">
+      <h2>Don't just take our word for it. See what our customers are saying.</h2>
+
+      <div class="testimonials--wrapper">
+        <img src="/chat_icon.webp" alt="chat icon" />
+      </div>
+    </section>
 
     <!-- PLANS SECTION -->
     <section id="section--2" class="section"></section>
@@ -176,15 +182,15 @@
     <!-- COMPONENTS -->
 
     <!-- SIGN UP MODAL -->
-    <!-- <div class="modal modal--container hidden"> -->
-    <div class="modal modal--container">
+    <div class="modal modal--container hidden">
       <div class="modal__box modal--sign-up">
+        <!-- Heading -->
         <p class="modal__heading">Create account</p>
 
+        <!-- Sign Up form -->
         <form class="form form--sign-up">
           <div class="form__carousel">
             <!-- USER -->
-            <!-- style="transform: translateX(-800px)" -->
             <section class="form__section form__section--user" style="transform: translateX(0px)">
               <p class="form__section__label">User details</p>
               <input type="text" id="first-name" placeholder="First name *" required />
@@ -238,6 +244,7 @@
           </div>
         </form>
 
+        <!-- Close  button -->
         <button class="btn btn--close-modal">
           <img src="/close-icon.svg" alt="close button" />
         </button>

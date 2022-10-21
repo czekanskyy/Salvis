@@ -9,6 +9,7 @@
   align-items: center;
   @include mixins.gap-y(96px);
   text-align: center;
+
   h2 {
     color: #ccc;
     text-transform: uppercase;
