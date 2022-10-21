@@ -1,8 +1,9 @@
 import './styles/index.scss';
 import { setSelectedAreaCode, setServedAreaCodes, setUserAreaCode } from './registerForm';
 import { fadeIn, fadeOut } from './utilities';
-import './hero';
 import './navbar';
+import './hero';
+import './testimonials';
 
 let dataRequested = false;
 
