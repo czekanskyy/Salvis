@@ -16,9 +16,9 @@ During development, I was heavily inspired by the look of Revolut's website, whi
 
 ### ROADMAP
 
-[x] Create overall layout and plan
-[x] Create landing page
-[ ] Create app page (banking functionality)
-[ ] Connect to a Supabase
-[ ] Create sign-up functionality
-[ ] Create banking functionality
+- [x] Create overall layout and plan
+- [x] Create landing page
+- [ ] Create app page (banking functionality)
+- [ ] Connect to a Supabase
+- [ ] Create sign-up functionality
+- [ ] Create banking functionality
