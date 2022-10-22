@@ -1,3 +1,4 @@
+// Show item smoothly
 const fadeIn = (el: HTMLElement) => {
   el.classList.remove('hidden');
   setTimeout(() => {
@@ -5,6 +6,7 @@ const fadeIn = (el: HTMLElement) => {
   }, 10);
 };
 
+// Hide item smoothly
 const fadeOut = (el: HTMLElement) => {
   el.classList.remove('fade');
   setTimeout(() => {

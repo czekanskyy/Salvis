@@ -1,6 +1,7 @@
 const HeroSection: HTMLElement = document.querySelector('.hero')!;
 const HeroBgImage: HTMLImageElement = document.querySelector('.hero__bg')!;
 
+// Resize & change opacity of hero bg on scroll
 const handleHeroScroll = () => {
   const height = HeroSection.getBoundingClientRect().height;
   const bottom = HeroSection.getBoundingClientRect().bottom;
@@ -11,7 +12,7 @@ const handleHeroScroll = () => {
 
 const observerCallback = (entries: IntersectionObserverEntry[]) => {
   const isInView = entries[0].isIntersecting;
-  // console.log(isInView);
+  // Add / Remove scrolling handler based on observer isIntersecting to save some memory
   if (isInView) document.addEventListener('scroll', handleHeroScroll);
   else document.removeEventListener('scroll', handleHeroScroll);
 };

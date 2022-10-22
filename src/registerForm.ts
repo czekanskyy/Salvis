@@ -1,24 +1,30 @@
-interface CountryName {
+import { fadeIn, fadeOut } from './utilities';
+
+const btnPrev: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.form__section__switcher--prev')!;
+const btnNext: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.form__section__switcher--next')!;
+const formSections: NodeListOf<HTMLElement> = document.querySelectorAll('.form__section')!;
+const currentPhone: HTMLButtonElement = document.querySelector('#select')!;
+const countryCodeOptions: HTMLDivElement = document.querySelector('.options')!;
+const countryCodeBtn: HTMLButtonElement = document.querySelector('.btn--select')!;
+const countrySearch: HTMLInputElement = document.querySelector('#phone-search')!;
+
+type CountryName = {
   location: {
     country: {
       name: string;
     };
   };
-}
+};
 
-interface CountryData {
+type CountryData = {
   name: string;
   flag: string;
   phone: number;
-}
+};
 
-const btnPrev: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.form__section__switcher--prev')!;
-const btnNext: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.form__section__switcher--next')!;
-const formSections: NodeListOf<HTMLElement> = document.querySelectorAll('.form__section')!;
-
+// Get user's country data based on it's IP Address
 const locateMe = async () => {
   try {
-    // Get user's country data based on it's IP Address
     const res = await fetch(`https://api.ipregistry.co/?key=egj8f14wsd947qsm`);
     const data: CountryName = await res.json();
     return data.location.country.name;
@@ -142,9 +148,37 @@ const togglePage = (e: MouseEvent, prev: boolean = false) => {
 btnPrev.forEach(btn => btn.addEventListener('click', e => togglePage(e, true)));
 btnNext.forEach(btn => btn.addEventListener('click', e => togglePage(e)));
 
-// Handle form submition (user registration)
+// Show / Hide country codes (phone) select menu
+const showCountryCodes = function () {
+  fadeIn(countryCodeOptions);
+};
+const hideCountryCodes = function () {
+  fadeOut(countryCodeOptions);
+};
+
+countryCodeBtn.addEventListener('click', e => {
+  e.preventDefault();
+  countryCodeOptions.classList.contains('hidden') ? showCountryCodes() : hideCountryCodes();
+});
+
+countryCodeOptions.addEventListener('click', e => {
+  const target = e.target as HTMLElement;
+  if (target.closest('.country')) {
+    setSelectedAreaCode(target.closest('.country')!, currentPhone);
+    hideCountryCodes();
+  }
+});
+
+// Search input
+countrySearch.addEventListener('input', e => {
+  const target = e.target as HTMLInputElement;
+  const text = target.value;
+  console.log(text);
+});
+
+// IMPORTANT Handle form submition (user registration)
 const handleSubmit = () => {
   return;
 };
 
-export { handleSubmit, setUserAreaCode, setServedAreaCodes, setSelectedAreaCode };
+export { handleSubmit, setUserAreaCode, setServedAreaCodes };

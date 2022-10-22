@@ -7,30 +7,40 @@ const mobileMenuToggler: HTMLButtonElement = document.querySelector('.toggler')!
 const mobileMenu: HTMLDivElement = document.querySelector('.mobile-menu')!;
 const icons: NodeListOf<HTMLImageElement> = mobileMenuToggler.querySelectorAll('img')!;
 
+// Below funcs are for toggling mobile menu
 const showMobileMenu = () => {
   fadeIn(mobileMenu);
   icons[0].classList.add('hidden');
   icons[1].classList.remove('hidden');
-
   document.body.classList.add('no-scroll');
 };
+
 const hideMobileMenu = () => {
   fadeOut(mobileMenu);
   icons[0].classList.remove('hidden');
   icons[1].classList.add('hidden');
-
   document.body.classList.remove('no-scroll');
 };
 
+mobileMenuToggler.addEventListener('click', () => {
+  if (mobileMenu.classList.contains('hidden')) {
+    showMobileMenu();
+  } else {
+    hideMobileMenu();
+  }
+});
+
 // Nav links functionality
+
+// Sctoll to top on logo click
 logo.addEventListener('click', () => {
   document.querySelector('.hero')?.scrollIntoView({ behavior: 'smooth' });
   hideMobileMenu();
 });
 
+// Scroll to sect handler
 const scrollToSect = (e: MouseEvent) => {
   const target = e.target as HTMLElement;
-  // console.log(target?.classList.contains('nav__link'));
   if (!target?.classList.contains('nav__link')) return;
   e.preventDefault();
   const href = target.getAttribute('href')!;
@@ -43,14 +53,6 @@ navMobile.addEventListener('click', e => {
   scrollToSect(e);
 
   hideMobileMenu();
-});
-
-mobileMenuToggler.addEventListener('click', () => {
-  if (mobileMenu.classList.contains('hidden')) {
-    showMobileMenu();
-  } else {
-    hideMobileMenu();
-  }
 });
 
 export {};

@@ -9,6 +9,12 @@
   padding-bottom: 32px;
   @include mixins.gap-y(32px);
 
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+  }
+
   .btn {
     &--sign-up {
       color: var(--var-primary);
@@ -30,6 +36,7 @@
       justify-content: space-between;
       img {
         width: 16px;
+        cursor: pointer;
       }
     }
     hr {
@@ -52,6 +59,15 @@
     &__heading {
       font-size: 2rem;
       margin-bottom: 8px;
+    }
+  }
+}
+
+@media screen {
+  @media (max-width: 1056px) {
+    .footer {
+      padding-left: 16px;
+      padding-right: 16px;
     }
   }
 }
