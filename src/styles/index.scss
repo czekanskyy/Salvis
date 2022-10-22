@@ -7,6 +7,8 @@
 @use 'hero';
 @use 'features';
 @use 'testimonials';
+@use 'plans';
+@use 'footer';
 
 :root {
   // GLOBAL CSS VARIABLES
@@ -37,7 +39,9 @@ body {
 }
 
 .section {
-  min-height: 100vh;
+  h2 {
+    font-size: 3.2rem;
+  }
   padding-top: 80px;
 }
 
@@ -52,6 +56,8 @@ body {
   border-radius: 8px;
   cursor: pointer;
   color: inherit;
+  display: grid;
+  place-content: center;
   @include mixins.transition();
   &--sign-up {
     background-color: var(--var-primary);

@@ -1,0 +1,57 @@
+@use 'mixins';
+
+.footer {
+  background-color: var(--var-primary);
+  color: var(--var-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 32px;
+  @include mixins.gap-y(32px);
+
+  .btn {
+    &--sign-up {
+      color: var(--var-primary);
+      background-color: var(--var-secondary);
+      &:hover {
+        background-color: var(--var-tertiary);
+      }
+    }
+  }
+
+  &__socials {
+    margin-top: 64px;
+    max-width: 1024px;
+    width: 100%;
+    > div {
+      font-size: 2.8rem;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      img {
+        width: 16px;
+      }
+    }
+    hr {
+      color: rgb(52, 52, 52);
+    }
+  }
+
+  &__copy {
+    max-width: 1024px;
+    width: 100%;
+    font-size: 1.4rem;
+    color: #777;
+  }
+
+  &__address {
+    max-width: 1024px;
+    width: 100%;
+    font-size: 1.6rem;
+    text-align: end;
+    &__heading {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -10,12 +10,6 @@
   @include mixins.gap-y(96px);
   text-align: center;
 
-  h2 {
-    color: #ccc;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 3rem;
-  }
   .feature {
     display: flex;
     flex-direction: column;

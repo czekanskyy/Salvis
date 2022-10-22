@@ -12,9 +12,9 @@ const countryCodeOptions: HTMLDivElement = document.querySelector('.options')!;
 const countrySearch: HTMLInputElement = document.querySelector('#phone-search')!;
 const currentPhone: HTMLButtonElement = document.querySelector('#select')!;
 const modalElement: HTMLDivElement = document.querySelector('.modal')!;
-const signupButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn--sign-up')!;
+const openModalButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.btn--open-modal')!;
 // Show Sign up modal
-signupButtons.forEach(btn => {
+openModalButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     if (!dataRequested) {
       setUserAreaCode(currentPhone);
